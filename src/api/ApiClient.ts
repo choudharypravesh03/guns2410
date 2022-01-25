@@ -1,6 +1,4 @@
-import apisauce, { SERVER_ERROR } from 'apisauce'
-import { AxiosRequestConfig } from 'axios'
-import { name, version } from '../../package.json'
+import apisauce from 'apisauce'
 import { CustomError, getError } from './APIErrorHandler'
 
 type APIResponse = any | CustomError
@@ -10,7 +8,6 @@ type Headers = {
   'content-type': string
   Accept: string
   Authorization: string
-  'x-country'?: string
 }
 
 export const getInstance = async (token?: string) => {
@@ -30,7 +27,6 @@ export const getInstance = async (token?: string) => {
   return apisauce.create({
     baseURL: `http://localhost:3000`,
     headers,
-    timeout: 16000, // timeout of 8 seconds timesout the API client over VPN.
   })
 }
 
@@ -38,11 +34,10 @@ const APIClient = {
   get: async (
     url: string,
     params?: {},
-    axiosConfig?: AxiosRequestConfig,
     token?: string,
   ): Promise<APIResponse> => {
     const api = await getInstance(token)
-    const response = await api.get(url, params, axiosConfig)
+    const response = await api.get(url, params)
     if (!response.ok) {
       throw getError(response)
     }

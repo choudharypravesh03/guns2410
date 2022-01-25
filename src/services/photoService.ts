@@ -1,7 +1,7 @@
 
 import api from '../api/ApiClient'
 
-type PhotosType = {
+export type PhotosType = {
     id: string,
     description: string,
     url: string,
