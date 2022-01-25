@@ -35,7 +35,7 @@ const Tile = ({ item }: any) => {
 }
 
 const GalleryContainer = styled.div`
-    padding: 6vh 16vw;
+    padding: 6vh 6vw;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
