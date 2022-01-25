@@ -29,6 +29,7 @@ const Tile = ({ item }: any) => {
 					alt={item.description}
 					style={tileStyle}
 				/>
+				<div className="description">{item.description}</div>
 			</div>
 		)
 }
@@ -45,14 +46,20 @@ const GalleryContainer = styled.div`
         cursor: pointer;
         overflow: hidden;
         width: 18vw;
-        height: 18vw;
-    }
-    .tile img {
-        width: 100%;
-        transition: transform 500ms ease;
-    }
-    .tile img:hover {
-        transform: scale(1.1);
+        height: 21vw;
+    	text-align: left;
+		transition: transform 500ms ease;
+		img {
+			width: 100%;
+    	}
+		.description {
+			margin-top: 10px;
+			font-size: 12px;
+			text-transform: 'capitalize'
+		}
+		:hover {
+			transform: scale(1.1);
+		}
     }
 `
 
