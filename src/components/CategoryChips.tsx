@@ -31,9 +31,6 @@ const CategoryChips = ({ categories, selectedCategory, onFilterSelect }: Categor
           <ul className="tabs-titles">
             {listTitles}
           </ul>
-          {/* <div className="tab-content">
-             {listContent}
-          </div> */}
         </CategoryChipsContainer>
       )
 }

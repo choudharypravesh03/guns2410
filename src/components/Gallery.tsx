@@ -6,30 +6,40 @@ type GalleryProps = {
 	photos: PhotosType[]
 }
 
+type GalleryTileProp = {
+	photo: PhotosType,
+	key: string
+}
+
 const Gallery = ({ photos }: GalleryProps) => {
     return (
         <GalleryContainer className="tiles">
             {photos.map((item: any) => {
-                return <Tile item={item} key={item.id} />
+                return <Tile photo={item} key={item.id} />
             })}
         </GalleryContainer>
     );
 } 
 
-const Tile = ({ item }: any) => {
+const Tile = ({ photo, key }: GalleryTileProp) => {
 		let tileStyle = {
             width: '18vw',
             height: '18vw'
         };
 
+		const redirectToOriginal = (item: PhotosType) => {
+			window.location.href = item.link
+		}
+
 		return (
-			<div className="tile">
+			<div onClick={() => redirectToOriginal(photo)} className="tile">
 				<img
-					src={item.url}
-					alt={item.description}
+					src={photo.url}
+					alt={photo.description}
 					style={tileStyle}
 				/>
-				<div className="description">{item.description}</div>
+				<div className="user">{photo.user}</div>
+				<div className="description">{photo.description}</div>
 			</div>
 		)
 }
@@ -52,8 +62,11 @@ const GalleryContainer = styled.div`
 		img {
 			width: 100%;
     	}
-		.description {
+		.user {
 			margin-top: 10px;
+		}
+		.description {
+			margin-top: 5px;
 			font-size: 12px;
 			text-transform: 'capitalize'
 		}

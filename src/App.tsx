@@ -3,6 +3,7 @@ import './App.css';
 import CategoryChips from './components/CategoryChips';
 import Gallery from './components/Gallery';
 import Loader from './components/Loader';
+import Search from './components/Search';
 import { getPhotos, PhotosType } from './services/photoService';
 
 const App = () => {
@@ -55,6 +56,7 @@ const App = () => {
   return (
     <div className="App">
       {isLoading && <Loader />}
+      <Search />
       {categories && <CategoryChips 
         categories={categories} 
         onFilterSelect={filterByTopics} 
