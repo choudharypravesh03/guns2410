@@ -48,10 +48,6 @@ const App = () => {
     }
   }
 
-  function helloWorld() {
-    console.log("Hello World!")
-}
-
   const filterBySearch = (text: string) => {
     if(text.length === 0) { setFilteredPhotos(allPhotos) }
     if (text.length > 3) {
