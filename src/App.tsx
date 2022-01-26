@@ -5,6 +5,7 @@ import Gallery from './components/Gallery';
 import Loader from './components/Loader';
 import Search from './components/Search';
 import { getPhotos, PhotosType } from './services/photoService';
+import debounce from 'lodash.debounce'
 
 const App = () => {
 
@@ -47,6 +48,23 @@ const App = () => {
     }
   }
 
+  function helloWorld() {
+    console.log("Hello World!")
+}
+
+  const filterBySearch = (text: string) => {
+    if(text.length === 0) { setFilteredPhotos(allPhotos) }
+    if (text.length > 3) {
+      const debExec = debounce(() => {
+          const searchedPhotos = allPhotos?.filter(item => {
+            return item.topics.find(item => item.includes(text))
+          })
+          setFilteredPhotos(searchedPhotos)
+        }, 1000)
+      debExec()
+    }
+  }
+
   const getCategories = (photos: PhotosType[]) => {
     const topicsNestedArray = photos.map(item => item.topics)
     const flatTopicsArray = Array.from(new Set(topicsNestedArray.flat(1)))
@@ -56,7 +74,7 @@ const App = () => {
   return (
     <div className="App">
       {isLoading && <Loader />}
-      <Search />
+      <Search onSearch={filterBySearch} />
       {categories && <CategoryChips 
         categories={categories} 
         onFilterSelect={filterByTopics} 
