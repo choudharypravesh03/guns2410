@@ -57,7 +57,10 @@ const App = () => {
     if (text.length > 3) {
       const debExec = debounce(() => {
           const searchedPhotos = allPhotos?.filter(item => {
-            return item.topics.find(item => item.includes(text))
+            const partOfTopic = item.topics.find(item => item.includes(text))
+            const isUser = item.user.includes(text)
+            const isInDesc = item.description?.includes(text)
+            return partOfTopic || isInDesc || isUser
           })
           setFilteredPhotos(searchedPhotos)
         }, 1000)
